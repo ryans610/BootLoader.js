@@ -42,14 +42,16 @@ var BootLoader=(function namespace(){
         for(var i in images){
             var img=new Image();
             img.crossOrigin="Anonymous";
-            img.onload=function(){
-                var canvas=document.createElement("canvas");
-                canvas.width=this.naturalWidth;
-                canvas.height=this.naturalHeight;
-                canvas.getContext("2d").drawImage(this,0,0);
-                config.result[i]=canvas.toDataURL();
-                checkLoad();
-            };
+            img.onload=(function(idx){
+                return function(e){
+                    var canvas=document.createElement("canvas");
+                    canvas.width=this.naturalWidth;
+                    canvas.height=this.naturalHeight;
+                    canvas.getContext("2d").drawImage(this,0,0);
+                    config.result[i]=canvas.toDataURL();
+                    checkLoad();
+                };
+            })(i);
             img.src=images[i];
         }
     };
