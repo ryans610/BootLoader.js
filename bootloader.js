@@ -48,7 +48,7 @@ var BootLoader=(function namespace(){
                     canvas.width=this.naturalWidth;
                     canvas.height=this.naturalHeight;
                     canvas.getContext("2d").drawImage(this,0,0);
-                    config.result[i]=canvas.toDataURL();
+                    config.result[idx]=canvas.toDataURL();
                     checkLoad();
                 };
             })(i);
