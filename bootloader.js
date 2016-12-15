@@ -37,14 +37,13 @@ var BootLoader=(function namespace(){
     };
     Init.prototype.loadImage=function(images,callback){
         //check
-        console.log(images);
         //load
         reset(images.length,callback,new Array(images.length));
         for(var i in images){
-            console.log(i);
             var img=new Image();
             img.crossOrigin="Anonymous";
             img.onload=function(){
+                console.log(i);
                 var canvas=document.createElement("canvas");
                 canvas.width=this.naturalWidth;
                 canvas.height=this.naturalHeight;
