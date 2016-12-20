@@ -12,14 +12,17 @@
             bootloader.loadImage([
                 "1.bmp",
                 "Desert.bmp",
+                "Lighthouse.jpg",
             ],function(srcs){
                 console.log(srcs);
                 document.getElementById("i1").src=srcs[0];
                 document.getElementById("i2").src=srcs[1];
+                document.getElementById("i3").src=srcs[2];
             });
         };
     </script>
     <img src="" alt="" id="i1">
     <img src="" alt="" id="i2">
+    <img src="" alt="" id="i3">
 </body>
 </html>
