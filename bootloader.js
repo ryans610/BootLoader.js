@@ -56,6 +56,36 @@ var BootLoader=(function namespace(){
             img.src=images[i];
         }
     };
+    Init.prototype.loadFont=function(fonts,callback){
+        //check
+        //load
+        reset(fonts.length,callback,null);
+        function ArrayBufferToBase64(buffer) {
+            var base64='';
+            var bytes=new Uint8Array(buffer);
+            for (var i=0;i<bytes.byteLength;i++){
+                base64+=String.fromCharCode(bytes[i]);
+            }
+            return window.btoa(base64);
+        }
+        for(var i in fonts){
+            var ajax=new XMLHttpRequest();
+            ajax.responseType='arraybuffer';
+            ajax.onreadystatechange=(function(idx){
+                return function(e){
+                    if(ajax.readyState==4&&ajax.status==200){
+                        var s=ArrayBufferToBase64(ajax.response);
+                        var css=document.createElement("style");
+                        css.innerHTML='@font-face{font-family:"'+fonts[idx].fontFamily+'";src:url(data:'+fonts[idx].fontType+';base64,'+s+')}';
+                        document.getElementsByTagName("head")[0].appendChild(css);
+                        checkLoad();
+                    }
+                };
+            })(i);
+            ajax.open("GET",fonts[i].fontUrl,true);
+            ajax.send();
+        }
+    };
     function checkLoad(){
         config.loadedCount++;
         if(config.loadedCount==config.targetCount){
