@@ -44,7 +44,6 @@ var BootLoader=(function namespace(){
             img.crossOrigin="Anonymous";
             img.onload=(function(idx){
                 return function(e){
-                    console.log(idx);
                     var canvas=document.createElement("canvas");
                     canvas.width=this.naturalWidth;
                     canvas.height=this.naturalHeight;
