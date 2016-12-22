@@ -4,11 +4,20 @@
     <meta charset="UTF-8">
     <title>Document</title>
     <script src="bootloader.js"></script>
+    <style>
+        .font1{
+            font-family: "font1";
+        }
+        .font2{
+            font-family: "font2";
+        }
+    </style>
 </head>
 <body>
     <script>
         window.onload=function(){
             var bootloader=new BootLoader();
+            /*
             bootloader.loadImage([
                 "1.bmp",
                 "Desert.bmp",
@@ -19,10 +28,30 @@
                 document.getElementById("i2").src=srcs[1];
                 document.getElementById("i3").src=srcs[2];
             });
+            */
+            bootloader.loadFont([
+                {
+                    fontFamily:"font1",
+                    fontType:"font/ttf",
+                    fontUrl:"wbfont.ttf",
+                },
+                {
+                    fontFamily:"font2",
+                    fontType:"font/ttf",
+                    fontUrl:"ChristmasTimePersonalUse.ttf",
+                },
+            ],function(){
+                document.getElementById("d1").innerHTML="D1!";
+                document.getElementById("d2").classList.add("font1");
+                document.getElementById("d3").classList.add("font2");
+            });
         };
     </script>
     <img src="" alt="" id="i1">
     <img src="" alt="" id="i2">
     <img src="" alt="" id="i3">
+    <div id="d1">D1</div>
+    <div id="d2">D2</div>
+    <div id="d3">D3</div>
 </body>
 </html>
