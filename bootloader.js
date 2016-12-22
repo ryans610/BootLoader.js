@@ -70,17 +70,17 @@ var BootLoader=(function namespace(){
         for(var i in fonts){
             var ajax=new XMLHttpRequest();
             ajax.responseType='arraybuffer';
-            ajax.onreadystatechange=(function(idx){
+            ajax.onreadystatechange=(function(o){
                 return function(e){
-                    if(ajax.readyState==4&&ajax.status==200){
-                        var s=ArrayBufferToBase64(ajax.response);
+                    if(this.readyState==4&&this.status==200){
+                        var s=ArrayBufferToBase64(this.response);
                         var css=document.createElement("style");
-                        css.innerHTML='@font-face{font-family:"'+fonts[idx].fontFamily+'";src:url(data:'+fonts[idx].fontType+';base64,'+s+')}';
+                        css.innerHTML='@font-face{font-family:"'+o.fontFamily+'";src:url(data:'+o.fontType+';base64,'+s+')}';
                         document.getElementsByTagName("head")[0].appendChild(css);
                         checkLoad();
                     }
                 };
-            })(i);
+            })(fonts[i]);
             ajax.open("GET",fonts[i].fontUrl,true);
             ajax.send();
         }
